@@ -83,7 +83,7 @@ class Runner {
   }
 }
 
-class Sabar {
+class Co {
   public current: null | Runner;
   public ancestor: null | Runner;
   public ctx: object | Function;
@@ -129,10 +129,10 @@ class Sabar {
   // ): void;
   /**
    *
-   * @param fn copy middleware function if fn is a sabar object.
+   * @param fn copy middleware function if fn is a co object.
    */
-  private useOne(fn: Fn | Sabar): void {
-    if (fn instanceof Sabar) {
+  private useOne(fn: Fn | Co): void {
+    if (fn instanceof Co) {
       let runner = fn.ancestor;
       while (runner) {
         this.useFn(runner.fn, this.ancestor);
@@ -145,10 +145,10 @@ class Sabar {
 
   /**
    *
-   * @param args could be array of function or Sabar object. When arg is a Sabar object,
-   * its middleware functions will be copied to new Sabar object.
+   * @param args could be array of function or Co object. When arg is a Co object,
+   * its middleware functions will be copied to new Co object.
    */
-  public use(...args: (Fn | Sabar)[]): Sabar {
+  public use(...args: (Fn | Co)[]): Co {
     args.forEach(fn => this.useOne(fn));
     return this;
   }
@@ -163,4 +163,4 @@ class Sabar {
   }
 }
 
-export default Sabar;
+export default Co;

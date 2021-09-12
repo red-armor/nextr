@@ -1,4 +1,4 @@
-import Sabar from '../src';
+import { Co } from '../src';
 
 testUse(true);
 testUse(false);
@@ -7,7 +7,7 @@ function testUse(useOne: boolean) {
   const prefix = useOne ? '[useOne]:' : '[useMultiple]:';
   describe(`${prefix} Test actions`, () => {
     it('next middleware will not be triggered automatically', () => {
-      const job = new Sabar();
+      const job = new Co();
       const mockCallback1 = jest.fn((str, ctx) => {
         ctx.result = `${str}_mock1`;
       });
@@ -28,7 +28,7 @@ function testUse(useOne: boolean) {
     });
 
     it('`next` to trigger next middleware', () => {
-      const job = new Sabar();
+      const job = new Co();
       const mockCallback1 = jest.fn((str, ctx, actions) => {
         ctx.result = `${str}_mock1`;
         actions.next();
@@ -51,7 +51,7 @@ function testUse(useOne: boolean) {
     });
 
     it('`back` to re-run from last middleware', () => {
-      const job = new Sabar();
+      const job = new Co();
       let falsy = false;
       const mockCallback1 = jest.fn((str, ctx, actions) => {
         ctx.result = `${str}_mock1`;
@@ -81,7 +81,7 @@ function testUse(useOne: boolean) {
     });
 
     it('`resume` to re-run from ancestor', () => {
-      const job = new Sabar({ ctx: { a: 1 } });
+      const job = new Co({ ctx: { a: 1 } });
       let falsy = false;
 
       const mockCallback1 = jest.fn((...args) => {
@@ -131,7 +131,7 @@ function testUse(useOne: boolean) {
 
   describe(`${prefix} Basic functionalities`, () => {
     it('middleware will be called after `start`', () => {
-      const job = new Sabar();
+      const job = new Co();
       const mockCallback = jest.fn(() => {});
 
       job.use(mockCallback);
@@ -145,7 +145,7 @@ function testUse(useOne: boolean) {
     });
 
     it('`start` with no args', () => {
-      const job = new Sabar({
+      const job = new Co({
         ctx: { result: '' },
       });
       const mockCallback1 = jest.fn((ctx, actions) => {
@@ -170,7 +170,7 @@ function testUse(useOne: boolean) {
     });
 
     it('Basically, the first parameter should be with same value', () => {
-      const job = new Sabar();
+      const job = new Co();
       const mockCallback1 = jest.fn((str, ctx, actions) => {
         ctx.result = `${str}_mock1`;
         actions.next();
@@ -201,7 +201,7 @@ function testUse(useOne: boolean) {
     });
 
     it('ctx is shared by middleware', () => {
-      const job = new Sabar({
+      const job = new Co({
         ctx: { result: {} },
       });
       const mockCallback1 = jest.fn((str, ctx, actions) => {
@@ -254,7 +254,7 @@ function testUse(useOne: boolean) {
 
   describe(`${prefix} args`, () => {
     it('fn is not last chain function and with two params', () => {
-      const job = new Sabar({
+      const job = new Co({
         ctx: { result: {} },
       });
       const mockCallback1 = jest.fn((str, ctx, actions) => {
@@ -309,7 +309,7 @@ function testUse(useOne: boolean) {
     });
 
     it('fn is not last chain function and with one param', () => {
-      const job = new Sabar({
+      const job = new Co({
         ctx: { result: {} },
       });
       const mockCallback1 = jest.fn((str, ctx, actions) => {
@@ -353,7 +353,7 @@ function testUse(useOne: boolean) {
     });
 
     it('fn is the last chain function and with one param, its value should be context', () => {
-      const job = new Sabar({
+      const job = new Co({
         ctx: { result: {} },
       });
       const mockCallback1 = jest.fn((str, ctx, actions) => {
@@ -391,7 +391,7 @@ function testUse(useOne: boolean) {
     });
 
     it('fn is the last chain function and with two params', () => {
-      const job = new Sabar({
+      const job = new Co({
         ctx: { result: {} },
       });
       const mockCallback1 = jest.fn((str, ctx, actions) => {
@@ -438,7 +438,7 @@ function testUse(useOne: boolean) {
 
   describe(`${prefix} return value`, () => {
     it('Basically, `ctx` will be return after start', () => {
-      const job = new Sabar({
+      const job = new Co({
         ctx: { result: {} },
       });
       const mockCallback1 = jest.fn((str, ctx, actions) => {
@@ -471,7 +471,7 @@ function testUse(useOne: boolean) {
 
   describe(`${prefix} throw error`, () => {
     it('try catch exception on sync mode', () => {
-      const job = new Sabar({
+      const job = new Co({
         ctx: {
           result: {},
           name: 'job',
@@ -504,9 +504,9 @@ function testUse(useOne: boolean) {
     });
   });
 
-  describe(`${prefix} use Sabar object`, () => {
-    it('Basically, sabar as use arg', () => {
-      const job = new Sabar({
+  describe(`${prefix} use Co object`, () => {
+    it('Basically, Co as use arg', () => {
+      const job = new Co({
         ctx: {
           result: {},
           name: 'job',
@@ -528,7 +528,7 @@ function testUse(useOne: boolean) {
         ctx.result.forth = `${str}_mock4`;
       });
 
-      const nextJob = new Sabar({
+      const nextJob = new Co({
         ctx: {
           result: {},
           name: 'nextJob',

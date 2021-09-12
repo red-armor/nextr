@@ -4,6 +4,7 @@
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
+    "types": [ "node", "jest" ],
     "importHelpers": true,
     // output .d.ts declaration files for consumers
     "declaration": true,

@@ -1,4 +1,3 @@
-import Sabar from './Sabar';
+export { default as Co } from './Co';
 
 export * from './types';
-export default Sabar;

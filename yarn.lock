@@ -1101,6 +1101,17 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
+"@jest/types@^27.1.1":
+  version "27.1.1"
+  resolved "http://npm.devops.xiaohongshu.com:7001/@jest/types/download/@jest/types-27.1.1.tgz#77a3fc014f906c65752d12123a0134359707c0ad"
+  integrity sha1-d6P8AU+QbGV1LRISOgE0NZcHwK0=
+  dependencies:
+    "@types/istanbul-lib-coverage" "^2.0.0"
+    "@types/istanbul-reports" "^3.0.0"
+    "@types/node" "*"
+    "@types/yargs" "^16.0.0"
+    chalk "^4.0.0"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "http://npm.devops.xiaohongshu.com:7001/@nodelib/fs.scandir/download/@nodelib/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -1303,6 +1314,13 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
+"@types/istanbul-reports@^3.0.0":
+  version "3.0.1"
+  resolved "http://npm.devops.xiaohongshu.com:7001/@types/istanbul-reports/download/@types/istanbul-reports-3.0.1.tgz#9153fe98bba2bd565a63add9436d6f0d7f8468ff"
+  integrity sha1-kVP+mLuivVZaY63ZQ21vDX+EaP8=
+  dependencies:
+    "@types/istanbul-lib-report" "*"
+
 "@types/jest@^25.2.1":
   version "25.2.3"
   resolved "http://npm.devops.xiaohongshu.com:7001/@types/jest/download/@types/jest-25.2.3.tgz#33d27e4c4716caae4eced355097a47ad363fdcaf"
@@ -1310,6 +1328,14 @@
   dependencies:
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
+
+"@types/jest@^27.0.1":
+  version "27.0.1"
+  resolved "http://npm.devops.xiaohongshu.com:7001/@types/jest/download/@types/jest-27.0.1.tgz#fafcc997da0135865311bb1215ba16dba6bdf4ca"
+  integrity sha1-+vzJl9oBNYZTEbsSFboW26a99Mo=
+  dependencies:
+    jest-diff "^27.0.0"
+    pretty-format "^27.0.0"
 
 "@types/json-schema@^7.0.3", "@types/json-schema@^7.0.8":
   version "7.0.9"
@@ -1321,7 +1347,7 @@
   resolved "http://npm.devops.xiaohongshu.com:7001/@types/json5/download/@types/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/node@*":
+"@types/node@*", "@types/node@^16.9.1":
   version "16.9.1"
   resolved "http://npm.devops.xiaohongshu.com:7001/@types/node/download/@types/node-16.9.1.tgz#0611b37db4246c937feef529ddcc018cf8e35708"
   integrity sha1-BhGzfbQkbJN/7vUp3cwBjPjjVwg=
@@ -1362,6 +1388,13 @@
   version "15.0.14"
   resolved "http://npm.devops.xiaohongshu.com:7001/@types/yargs/download/@types/yargs-15.0.14.tgz#26d821ddb89e70492160b66d10a0eb6df8f6fb06"
   integrity sha1-Jtgh3biecEkhYLZtEKDrbfj2+wY=
+  dependencies:
+    "@types/yargs-parser" "*"
+
+"@types/yargs@^16.0.0":
+  version "16.0.4"
+  resolved "http://npm.devops.xiaohongshu.com:7001/@types/yargs/download/@types/yargs-16.0.4.tgz#26aad98dd2c2a38e421086ea9ad42b9e51642977"
+  integrity sha1-JqrZjdLCo45CEIbqmtQrnlFkKXc=
   dependencies:
     "@types/yargs-parser" "*"
 
@@ -1676,6 +1709,11 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   integrity sha1-7dgDYornHATIWuegkG7a00tkiTc=
   dependencies:
     color-convert "^2.0.1"
+
+ansi-styles@^5.0.0:
+  version "5.2.0"
+  resolved "http://npm.devops.xiaohongshu.com:7001/ansi-styles/download/ansi-styles-5.2.0.tgz#07449690ad45777d1924ac2abb2fc8895dba836b"
+  integrity sha1-B0SWkK1Fd30ZJKwquy/IiV26g2s=
 
 anymatch@^2.0.0:
   version "2.0.0"
@@ -2996,6 +3034,11 @@ diff-sequences@^25.2.6:
   version "25.2.6"
   resolved "http://npm.devops.xiaohongshu.com:7001/diff-sequences/download/diff-sequences-25.2.6.tgz#5f467c00edd35352b7bca46d7927d60e687a76dd"
   integrity sha1-X0Z8AO3TU1K3vKRteSfWDmh6dt0=
+
+diff-sequences@^27.0.6:
+  version "27.0.6"
+  resolved "http://npm.devops.xiaohongshu.com:7001/diff-sequences/download/diff-sequences-27.0.6.tgz#3305cb2e55a033924054695cc66019fd7f8e5723"
+  integrity sha1-MwXLLlWgM5JAVGlcxmAZ/X+OVyM=
 
 diffie-hellman@^5.0.0:
   version "5.0.3"
@@ -4713,6 +4756,16 @@ jest-diff@^25.2.1, jest-diff@^25.5.0:
     jest-get-type "^25.2.6"
     pretty-format "^25.5.0"
 
+jest-diff@^27.0.0:
+  version "27.1.1"
+  resolved "http://npm.devops.xiaohongshu.com:7001/jest-diff/download/jest-diff-27.1.1.tgz#1d1629ca2e3933b10cb27dc260e28e3dba182684"
+  integrity sha1-HRYpyi45M7EMsn3CYOKOPboYJoQ=
+  dependencies:
+    chalk "^4.0.0"
+    diff-sequences "^27.0.6"
+    jest-get-type "^27.0.6"
+    pretty-format "^27.1.1"
+
 jest-docblock@^25.3.0:
   version "25.3.0"
   resolved "http://npm.devops.xiaohongshu.com:7001/jest-docblock/download/jest-docblock-25.3.0.tgz#8b777a27e3477cd77a168c05290c471a575623ef"
@@ -4759,6 +4812,11 @@ jest-get-type@^25.2.6:
   version "25.2.6"
   resolved "http://npm.devops.xiaohongshu.com:7001/jest-get-type/download/jest-get-type-25.2.6.tgz#0b0a32fab8908b44d508be81681487dbabb8d877"
   integrity sha1-Cwoy+riQi0TVCL6BaBSH26u42Hc=
+
+jest-get-type@^27.0.6:
+  version "27.0.6"
+  resolved "http://npm.devops.xiaohongshu.com:7001/jest-get-type/download/jest-get-type-27.0.6.tgz#0eb5c7f755854279ce9b68a9f1a4122f69047cfe"
+  integrity sha1-DrXH91WFQnnOm2ip8aQSL2kEfP4=
 
 jest-haste-map@^25.5.1:
   version "25.5.1"
@@ -6550,6 +6608,16 @@ pretty-format@^25.2.1, pretty-format@^25.5.0:
     ansi-styles "^4.0.0"
     react-is "^16.12.0"
 
+pretty-format@^27.0.0, pretty-format@^27.1.1:
+  version "27.1.1"
+  resolved "http://npm.devops.xiaohongshu.com:7001/pretty-format/download/pretty-format-27.1.1.tgz#cbaf9ec6cd7cfc3141478b6f6293c0ccdbe968e0"
+  integrity sha1-y6+exs18/DFBR4tvYpPAzNvpaOA=
+  dependencies:
+    "@jest/types" "^27.1.1"
+    ansi-regex "^5.0.0"
+    ansi-styles "^5.0.0"
+    react-is "^17.0.1"
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "http://npm.devops.xiaohongshu.com:7001/process-nextick-args/download/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -6698,6 +6766,11 @@ react-is@^16.12.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "http://npm.devops.xiaohongshu.com:7001/react-is/download/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
+
+react-is@^17.0.1:
+  version "17.0.2"
+  resolved "http://npm.devops.xiaohongshu.com:7001/react-is/download/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
+  integrity sha1-5pHUqOnHiTZWVVOas3J2Kw77VPA=
 
 read-pkg-up@^3.0.0:
   version "3.0.0"
