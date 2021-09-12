@@ -123,3 +123,30 @@ job.start()
 | back  |  Rerun from last middleware |
 | abort  |  Stop middleware running |
 | resume  |  Rerun from beginning |
+
+## Error
+
+### Default Error handler
+
+- [koa - Error Handling](https://github.com/koajs/koa/blob/master/docs/error-handling.md#default-error-handler)
+
+> The default error handler is essentially a try-catch at the very beginning of the middleware chain.
+
+```js
+const job = new Co()
+job.use((actions) => {
+  try {
+    actions.next()
+  } catch (err) {
+    // do default action
+  }
+})
+```
+
+When an error occur, error message will be marked with a common info to indicate it's a Co Error. The rules to build info is described as follows
+
+```js
+  const message = error.message;
+  const functionName = fn.name || String(fn).slice(0, 10);
+  const coErrorMessage = `[Co Exception ${functionName}]: ${message}`;
+```

@@ -500,7 +500,165 @@ function testUse(useOne: boolean) {
           job.use(mockCallback1, mockCallback2, mockCallback3);
         }
         job.start('first');
-      }).toThrowError('error in callback2');
+      }).toThrowError('[Co Exception mockConstructor]: error in callback2');
+    });
+
+    it('try catch exception on sync mode - basic function', () => {
+      const job = new Co({
+        ctx: {
+          result: {},
+          name: 'job',
+        },
+      });
+      // @ts-ignore
+      const mockCallback1 = (str, ctx, actions) => {
+        ctx.result.first = `${str}_mock1`;
+        actions.next();
+      };
+      // @ts-ignore
+      const mockCallback2 = actions => {
+        throw new Error('error in callback2');
+        // eslint-disable-next-line
+        actions.next();
+      };
+      // @ts-ignore
+      const mockCallback3 = (str, ctx, actions) => {
+        ctx.result.third = `${str}_mock3`;
+        actions.next();
+      };
+
+      expect(() => {
+        if (useOne) {
+          job.use(mockCallback1);
+          job.use(mockCallback2);
+          job.use(mockCallback3);
+        } else {
+          job.use(mockCallback1, mockCallback2, mockCallback3);
+        }
+        job.start('first');
+      }).toThrowError('[Co Exception mockCallback2]: error in callback2');
+    });
+
+    it('try catch exception on sync mode - anonymous function', () => {
+      const job = new Co({
+        ctx: {
+          result: {},
+          name: 'job',
+        },
+      });
+
+      expect(() => {
+        if (useOne) {
+          // @ts-ignore
+          job.use((str, ctx, actions) => {
+            ctx.result.first = `${str}_mock1`;
+            actions.next();
+          });
+          // @ts-ignore
+          job.use(actions => {
+            throw new Error('error in callback2');
+            // eslint-disable-next-line
+            actions.next();
+          });
+          // @ts-ignore
+          job.use((str, ctx, actions) => {
+            ctx.result.third = `${str}_mock3`;
+            actions.next();
+          });
+        } else {
+          job.use(
+            //@ts-ignore
+            (str, ctx, actions) => {
+              ctx.result.first = `${str}_mock1`;
+              actions.next();
+            },
+            //@ts-ignore
+            actions => {
+              throw new Error('error in callback2');
+              // eslint-disable-next-line
+              actions.next();
+            },
+            //@ts-ignore
+            (str, ctx, actions) => {
+              ctx.result.third = `${str}_mock3`;
+              actions.next();
+            }
+          );
+        }
+        job.start('first');
+      }).toThrowError('[Co Exception function (]: error in callback2');
+    });
+
+    it('try catch exception on sync mode - default error handler', () => {
+      const job = new Co({
+        ctx: {
+          result: {},
+          name: 'job',
+        },
+      });
+
+      expect(() => {
+        if (useOne) {
+          // @ts-ignore
+          job.use(actions => {
+            try {
+              actions.next();
+            } catch (err) {
+              // @ts-ignore
+              err.message = `default error ${err.message}`;
+              throw err;
+            }
+          });
+          // @ts-ignore
+          job.use((str, ctx, actions) => {
+            ctx.result.first = `${str}_mock1`;
+            actions.next();
+          });
+          // @ts-ignore
+          job.use(actions => {
+            throw new Error('error in callback2');
+            // eslint-disable-next-line
+            actions.next();
+          });
+          // @ts-ignore
+          job.use((str, ctx, actions) => {
+            ctx.result.third = `${str}_mock3`;
+            actions.next();
+          });
+        } else {
+          job.use(
+            // @ts-ignore
+            actions => {
+              try {
+                actions.next();
+              } catch (err) {
+                // @ts-ignore
+                err.message = `default error ${err.message}`;
+                throw err;
+              }
+            },
+            //@ts-ignore
+            (str, ctx, actions) => {
+              ctx.result.first = `${str}_mock1`;
+              actions.next();
+            },
+            //@ts-ignore
+            actions => {
+              throw new Error('error in callback2');
+              // eslint-disable-next-line
+              actions.next();
+            },
+            //@ts-ignore
+            (str, ctx, actions) => {
+              ctx.result.third = `${str}_mock3`;
+              actions.next();
+            }
+          );
+        }
+        job.start('first');
+      }).toThrowError(
+        'default error [Co Exception function (]: error in callback2'
+      );
     });
   });
 

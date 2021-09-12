@@ -1,6 +1,18 @@
 import { isFunction } from './utils';
 import { Fn } from './types';
 
+const isCoError = (error: Error) => {
+  return /Co Exception/.test(error.message);
+};
+
+const buildCoError = (fn: Function, error: Error) => {
+  const message = error.message;
+  const functionName = fn.name || String(fn).slice(0, 10);
+  const coErrorMessage = `[Co Exception ${functionName}]: ${message}`;
+  error.message = coErrorMessage;
+  return error;
+};
+
 class Runner {
   public fn: Function;
   public ancestor: null | Runner;
@@ -66,7 +78,16 @@ class Runner {
       // if len is 1, arg will be context value.
       if (len === 1) args = args.slice(-2, -1);
     }
-    this.fn.apply(this, args);
+
+    try {
+      this.fn.apply(this, args);
+    } catch (err) {
+      // console.log('err ', isCoError(err as Error), err)
+      if (isCoError(err as Error)) {
+        throw err;
+      }
+      throw buildCoError(this.fn, err as Error);
+    }
   }
 
   setPrevSibling(runner: Runner) {
