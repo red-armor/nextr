@@ -1,5 +1,5 @@
 import { Co } from '../src';
-
+import { describe, it, vi } from 'vitest';
 testUse(true);
 testUse(false);
 
@@ -8,10 +8,10 @@ function testUse(useOne: boolean) {
   describe(`${prefix} Test actions`, () => {
     it('next middleware will not be triggered automatically', () => {
       const job = new Co();
-      const mockCallback1 = jest.fn((str, ctx) => {
+      const mockCallback1 = vi.fn((str, ctx) => {
         ctx.result = `${str}_mock1`;
       });
-      const mockCallback2 = jest.fn((str, ctx) => {
+      const mockCallback2 = vi.fn((str, ctx) => {
         ctx.result = `${str}_mock2`;
       });
       if (useOne) {
@@ -29,11 +29,11 @@ function testUse(useOne: boolean) {
 
     it('`next` to trigger next middleware', () => {
       const job = new Co();
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn((str, ctx) => {
+      const mockCallback2 = vi.fn((str, ctx) => {
         ctx.result = `${str}_mock2`;
       });
 
@@ -53,11 +53,11 @@ function testUse(useOne: boolean) {
     it('`back` to re-run from last middleware', () => {
       const job = new Co();
       let falsy = false;
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn((str, ctx, actions) => {
+      const mockCallback2 = vi.fn((str, ctx, actions) => {
         ctx.result = `${str}_mock2`;
         if (!falsy) {
           falsy = true; // should be placed before action.back(), or will go into loop
@@ -84,19 +84,19 @@ function testUse(useOne: boolean) {
       const job = new Co({ ctx: { a: 1 } });
       let falsy = false;
 
-      const mockCallback1 = jest.fn((...args) => {
+      const mockCallback1 = vi.fn((...args) => {
         const length = args.length;
         const actions = args[length - 1];
         actions.next();
       });
 
-      const mockCallback2 = jest.fn((...args) => {
+      const mockCallback2 = vi.fn((...args) => {
         const length = args.length;
         const actions = args[length - 1];
         actions.next();
       });
 
-      const mockCallback3 = jest.fn((...args) => {
+      const mockCallback3 = vi.fn((...args) => {
         const length = args.length;
         const actions = args[length - 1];
         if (falsy) actions.next();
@@ -106,7 +106,7 @@ function testUse(useOne: boolean) {
         }
       });
 
-      const mockCallback4 = jest.fn((...args) => {
+      const mockCallback4 = vi.fn((...args) => {
         const length = args.length;
         const actions = args[length - 1];
         actions.next();
@@ -132,7 +132,7 @@ function testUse(useOne: boolean) {
   describe(`${prefix} Basic functionalities`, () => {
     it('middleware will be called after `start`', () => {
       const job = new Co();
-      const mockCallback = jest.fn(() => {});
+      const mockCallback = vi.fn(() => {});
 
       job.use(mockCallback);
       job.start('first');
@@ -148,11 +148,11 @@ function testUse(useOne: boolean) {
       const job = new Co({
         ctx: { result: '' },
       });
-      const mockCallback1 = jest.fn((ctx, actions) => {
+      const mockCallback1 = vi.fn((ctx, actions) => {
         ctx.result = `mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn(ctx => {
+      const mockCallback2 = vi.fn((ctx) => {
         ctx.result = `mock2`;
       });
 
@@ -171,15 +171,15 @@ function testUse(useOne: boolean) {
 
     it('Basically, the first parameter should be with same value', () => {
       const job = new Co();
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn((str, ctx, actions) => {
+      const mockCallback2 = vi.fn((str, ctx, actions) => {
         ctx.result = `${str}_mock2`;
         actions.next();
       });
-      const mockCallback3 = jest.fn((str, ctx) => {
+      const mockCallback3 = vi.fn((str, ctx) => {
         ctx.result = `${str}_mock3`;
       });
 
@@ -204,15 +204,15 @@ function testUse(useOne: boolean) {
       const job = new Co({
         ctx: { result: {} },
       });
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result.first = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn((str, ctx, actions) => {
+      const mockCallback2 = vi.fn((str, ctx, actions) => {
         ctx.result.second = `${str}_mock2`;
         actions.next();
       });
-      const mockCallback3 = jest.fn((str, ctx) => {
+      const mockCallback3 = vi.fn((str, ctx) => {
         ctx.result.third = `${str}_mock3`;
       });
 
@@ -257,15 +257,15 @@ function testUse(useOne: boolean) {
       const job = new Co({
         ctx: { result: {} },
       });
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result.first = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn((ctx, actions) => {
+      const mockCallback2 = vi.fn((ctx, actions) => {
         ctx.result.second = `mock2`;
         actions.next();
       });
-      const mockCallback3 = jest.fn((str, ctx) => {
+      const mockCallback3 = vi.fn((str, ctx) => {
         ctx.result.third = `${str}_mock3`;
       });
 
@@ -312,14 +312,14 @@ function testUse(useOne: boolean) {
       const job = new Co({
         ctx: { result: {} },
       });
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result.first = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn(actions => {
+      const mockCallback2 = vi.fn((actions) => {
         actions.next();
       });
-      const mockCallback3 = jest.fn((str, ctx) => {
+      const mockCallback3 = vi.fn((str, ctx) => {
         ctx.result.third = `${str}_mock3`;
       });
 
@@ -356,16 +356,16 @@ function testUse(useOne: boolean) {
       const job = new Co({
         ctx: { result: {} },
       });
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result.first = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn(actions => {
+      const mockCallback2 = vi.fn((actions) => {
         actions.next();
       });
 
       // @ts-ignore
-      const mockCallback3 = jest.fn(str => {});
+      const mockCallback3 = vi.fn((str) => {});
 
       if (useOne) {
         job.use(mockCallback1);
@@ -394,14 +394,14 @@ function testUse(useOne: boolean) {
       const job = new Co({
         ctx: { result: {} },
       });
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result.first = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn(actions => {
+      const mockCallback2 = vi.fn((actions) => {
         actions.next();
       });
-      const mockCallback3 = jest.fn((str, ctx) => {
+      const mockCallback3 = vi.fn((str, ctx) => {
         ctx.result.third = `${str}_mock3`;
       });
 
@@ -441,14 +441,14 @@ function testUse(useOne: boolean) {
       const job = new Co({
         ctx: { result: {} },
       });
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result.first = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn(actions => {
+      const mockCallback2 = vi.fn((actions) => {
         actions.next();
       });
-      const mockCallback3 = jest.fn((str, ctx) => {
+      const mockCallback3 = vi.fn((str, ctx) => {
         ctx.result.third = `${str}_mock3`;
       });
 
@@ -477,16 +477,16 @@ function testUse(useOne: boolean) {
           name: 'job',
         },
       });
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result.first = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn(actions => {
+      const mockCallback2 = vi.fn((actions) => {
         throw new Error('error in callback2');
         // eslint-disable-next-line
         actions.next();
       });
-      const mockCallback3 = jest.fn((str, ctx, actions) => {
+      const mockCallback3 = vi.fn((str, ctx, actions) => {
         ctx.result.third = `${str}_mock3`;
         actions.next();
       });
@@ -500,7 +500,7 @@ function testUse(useOne: boolean) {
           job.use(mockCallback1, mockCallback2, mockCallback3);
         }
         job.start('first');
-      }).toThrowError('[Co Exception mockConstructor]: error in callback2');
+      }).toThrowError('[Co Exception spy]: error in callback2');
     });
 
     it('try catch exception on sync mode - basic function', () => {
@@ -516,7 +516,7 @@ function testUse(useOne: boolean) {
         actions.next();
       };
       // @ts-ignore
-      const mockCallback2 = actions => {
+      const mockCallback2 = (actions) => {
         throw new Error('error in callback2');
         // eslint-disable-next-line
         actions.next();
@@ -555,7 +555,7 @@ function testUse(useOne: boolean) {
             actions.next();
           });
           // @ts-ignore
-          job.use(actions => {
+          job.use((actions) => {
             throw new Error('error in callback2');
             // eslint-disable-next-line
             actions.next();
@@ -573,7 +573,7 @@ function testUse(useOne: boolean) {
               actions.next();
             },
             //@ts-ignore
-            actions => {
+            (actions) => {
               throw new Error('error in callback2');
               // eslint-disable-next-line
               actions.next();
@@ -586,7 +586,7 @@ function testUse(useOne: boolean) {
           );
         }
         job.start('first');
-      }).toThrowError('[Co Exception function (]: error in callback2');
+      }).toThrowError('[Co Exception (actions) ]: error in callback2');
     });
 
     it('try catch exception on sync mode - default error handler', () => {
@@ -600,7 +600,7 @@ function testUse(useOne: boolean) {
       expect(() => {
         if (useOne) {
           // @ts-ignore
-          job.use(actions => {
+          job.use((actions) => {
             try {
               actions.next();
             } catch (err) {
@@ -615,7 +615,7 @@ function testUse(useOne: boolean) {
             actions.next();
           });
           // @ts-ignore
-          job.use(actions => {
+          job.use((actions) => {
             throw new Error('error in callback2');
             // eslint-disable-next-line
             actions.next();
@@ -628,7 +628,7 @@ function testUse(useOne: boolean) {
         } else {
           job.use(
             // @ts-ignore
-            actions => {
+            (actions) => {
               try {
                 actions.next();
               } catch (err) {
@@ -643,7 +643,7 @@ function testUse(useOne: boolean) {
               actions.next();
             },
             //@ts-ignore
-            actions => {
+            (actions) => {
               throw new Error('error in callback2');
               // eslint-disable-next-line
               actions.next();
@@ -657,7 +657,7 @@ function testUse(useOne: boolean) {
         }
         job.start('first');
       }).toThrowError(
-        'default error [Co Exception function (]: error in callback2'
+        'default error [Co Exception (actions) ]: error in callback2'
       );
     });
   });
@@ -670,19 +670,19 @@ function testUse(useOne: boolean) {
           name: 'job',
         },
       });
-      const mockCallback1 = jest.fn((str, ctx, actions) => {
+      const mockCallback1 = vi.fn((str, ctx, actions) => {
         ctx.result.first = `${str}_mock1`;
         actions.next();
       });
-      const mockCallback2 = jest.fn(actions => {
+      const mockCallback2 = vi.fn((actions) => {
         actions.next();
       });
-      const mockCallback3 = jest.fn((str, ctx, actions) => {
+      const mockCallback3 = vi.fn((str, ctx, actions) => {
         ctx.result.third = `${str}_mock3`;
         actions.next();
       });
 
-      const mockCallback4 = jest.fn((str, ctx) => {
+      const mockCallback4 = vi.fn((str, ctx) => {
         ctx.result.forth = `${str}_mock4`;
       });
 
