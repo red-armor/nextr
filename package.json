@@ -14,8 +14,9 @@
     "start": "tsup --watch",
     "build": "tsup",
     "test": "vitest",
+    "test:coverage": "vitest --coverage",
     "lint": "eslint --cache --fix",
-    "prepare": "tsup",
+    "prepare": "husky install && tsup",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
@@ -50,9 +51,10 @@
     }
   ],
   "devDependencies": {
-    "@innei/eslint-config-ts": "0.9.4",
+    "@innei/eslint-config-ts": "0.9.8",
     "@size-limit/preset-small-lib": "^4.9.1",
     "@types/node": "^16.9.1",
+    "@vitest/coverage-istanbul": "^0.29.2",
     "eslint": "^8.36.0",
     "husky": "8.0.3",
     "lint-staged": "^13.2.0",

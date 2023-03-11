@@ -1,10 +1,18 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "include": ["src", "types"],
+  "include": [
+    "src",
+    "types"
+  ],
   "compilerOptions": {
     "module": "esnext",
-    "lib": ["dom", "esnext"],
-    "types": [ "node", "jest" ],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "types": [
+      "node"
+    ],
     "importHelpers": true,
     // output .d.ts declaration files for consumers
     "declaration": true,
